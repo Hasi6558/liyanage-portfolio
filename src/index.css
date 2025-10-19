@@ -1,0 +1,192 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    --background: 222 47% 11%;
+    --foreground: 214 32% 91%;
+
+    --card: 222 47% 15%;
+    --card-foreground: 214 32% 91%;
+
+    --popover: 222 47% 13%;
+    --popover-foreground: 214 32% 91%;
+
+    --primary: 199 89% 48%;
+    --primary-foreground: 222 47% 11%;
+
+    --secondary: 222 47% 18%;
+    --secondary-foreground: 214 32% 91%;
+
+    --muted: 222 47% 20%;
+    --muted-foreground: 214 20% 65%;
+
+    --accent: 199 89% 48%;
+    --accent-foreground: 222 47% 11%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 214 32% 91%;
+
+    --border: 222 47% 20%;
+    --input: 222 47% 18%;
+    --ring: 199 89% 48%;
+
+    --radius: 0.75rem;
+
+    /* Custom gradient tokens */
+    --gradient-primary: linear-gradient(135deg, hsl(199, 89%, 48%), hsl(199, 89%, 68%));
+    --gradient-card: linear-gradient(135deg, hsl(222, 47%, 15%), hsl(222, 47%, 18%));
+    --gradient-hero: linear-gradient(180deg, hsl(222, 47%, 11%) 0%, hsl(222, 47%, 15%) 100%);
+    
+    /* Glassmorphism */
+    --glass-bg: hsla(222, 47%, 15%, 0.5);
+    --glass-border: hsla(214, 32%, 91%, 0.1);
+    
+    /* Shadows */
+    --shadow-glow: 0 0 40px hsla(199, 89%, 48%, 0.3);
+    --shadow-card: 0 10px 40px -10px hsla(199, 89%, 48%, 0.2);
+    --shadow-elevated: 0 20px 60px -15px hsla(199, 89%, 48%, 0.4);
+    
+    /* Animation */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .light {
+    --background: 0 0% 100%;
+    --foreground: 222 47% 11%;
+
+    --card: 0 0% 98%;
+    --card-foreground: 222 47% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    --primary: 199 89% 48%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 214 32% 95%;
+    --secondary-foreground: 222 47% 11%;
+
+    --muted: 214 32% 95%;
+    --muted-foreground: 222 47% 45%;
+
+    --accent: 199 89% 48%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 214 32% 85%;
+    --input: 214 32% 85%;
+    --ring: 199 89% 48%;
+
+    --glass-bg: hsla(0, 0%, 100%, 0.7);
+    --glass-border: hsla(222, 47%, 11%, 0.1);
+    
+    --shadow-glow: 0 0 40px hsla(199, 89%, 48%, 0.2);
+    --shadow-card: 0 10px 40px -10px hsla(199, 89%, 48%, 0.15);
+    --shadow-elevated: 0 20px 60px -15px hsla(199, 89%, 48%, 0.3);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply backdrop-blur-lg border border-white/10 rounded-xl;
+    background: var(--glass-bg);
+    box-shadow: var(--shadow-card);
+  }
+
+  .gradient-primary {
+    background: var(--gradient-primary);
+  }
+
+  .gradient-text {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-primary);
+  }
+
+  .hover-lift {
+    @apply transition-all duration-300 hover:-translate-y-2;
+    transition: var(--transition-smooth);
+  }
+
+  .hover-glow {
+    @apply transition-all duration-300;
+    transition: var(--transition-smooth);
+  }
+
+  .hover-glow:hover {
+    box-shadow: var(--shadow-glow);
+  }
+
+  .section-padding {
+    @apply py-20 px-6 md:px-12 lg:px-24;
+  }
+}
+
+@layer utilities {
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+
+  .animate-gradient {
+    background-size: 200% 200%;
+    animation: gradient 8s ease infinite;
+  }
+
+  @keyframes gradient {
+    0%, 100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  .cursor-hover {
+    cursor: pointer;
+  }
+
+  .cursor-hover:hover {
+    box-shadow: var(--shadow-glow);
+  }
+
+  /* Smooth transitions for theme switching */
+  * {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  }
+
+  /* Prevent transition on theme switch for specific properties */
+  .no-transition {
+    transition: none !important;
+  }
+}
