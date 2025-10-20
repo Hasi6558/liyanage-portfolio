@@ -48,19 +48,7 @@ const Hero = () => {
           >
             <Button
               size="lg"
-              className="gradient-primary hover-glow font-semibold"
-              onClick={() =>
-                document
-                  .getElementById("projects")
-                  ?.scrollIntoView({ behavior: "smooth" })
-              }
-            >
-              View Projects
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="border-primary/50 hover:bg-primary/10 hover-lift"
+              className="gradient-primary hover-glow font-semibold group"
               onClick={() =>
                 document
                   .getElementById("contact")
@@ -68,6 +56,25 @@ const Hero = () => {
               }
             >
               Contact Me
+              <motion.span
+                className="inline-block ml-2"
+                animate={{ x: [0, 5, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity }}
+              >
+                →
+              </motion.span>
+            </Button>
+            <Button
+              size="lg"
+              variant="outline"
+              className="border-primary/50 hover:bg-primary/10 hover-lift"
+              onClick={() =>
+                document
+                  .getElementById("projects")
+                  ?.scrollIntoView({ behavior: "smooth" })
+              }
+            >
+              View Projects
             </Button>
           </motion.div>
 

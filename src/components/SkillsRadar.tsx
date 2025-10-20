@@ -5,12 +5,15 @@ const SkillsRadar = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   const skills = [
-    { name: "React.js", level: 90, color: "hsl(199, 89%, 48%)" },
-    { name: "Node.js", level: 85, color: "hsl(142, 71%, 45%)" },
-    { name: "Spring Boot", level: 80, color: "hsl(142, 52%, 42%)" },
-    { name: "TypeScript", level: 85, color: "hsl(211, 60%, 48%)" },
-    { name: "MongoDB", level: 75, color: "hsl(142, 78%, 35%)" },
-    { name: "Docker", level: 70, color: "hsl(197, 71%, 47%)" },
+    { name: "React.js", level: 90, color: "hsl(199, 89%, 48%)", icon: "⚛️" },
+    { name: "Node.js", level: 85, color: "hsl(142, 71%, 45%)", icon: "🟢" },
+    { name: "Next.js", level: 88, color: "hsl(0, 0%, 0%)", icon: "▲" },
+    { name: "Nest.js", level: 82, color: "hsl(0, 100%, 50%)", icon: "🐈" },
+    { name: "Spring Boot", level: 80, color: "hsl(142, 52%, 42%)", icon: "🍃" },
+    { name: "MongoDB", level: 75, color: "hsl(142, 78%, 35%)", icon: "🍃" },
+    { name: "Express.js", level: 83, color: "hsl(0, 0%, 30%)", icon: "⚡" },
+    { name: "TailwindCSS", level: 92, color: "hsl(199, 89%, 48%)", icon: "💨" },
+    { name: "Docker", level: 70, color: "hsl(197, 71%, 47%)", icon: "🐋" },
   ];
 
   useEffect(() => {
@@ -56,8 +59,11 @@ const SkillsRadar = () => {
             whileHover={{ scale: 1.2 }}
           >
             <motion.div
-              className="w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center text-xs md:text-sm font-semibold text-white shadow-lg"
-              style={{ backgroundColor: skill.color }}
+              className="w-20 h-20 md:w-24 md:h-24 rounded-full flex items-center justify-center text-4xl md:text-5xl shadow-lg backdrop-blur-sm border-2"
+              style={{
+                backgroundColor: `${skill.color}20`,
+                borderColor: skill.color,
+              }}
               animate={{
                 boxShadow: [
                   `0 0 20px ${skill.color}40`,
@@ -70,8 +76,13 @@ const SkillsRadar = () => {
                 repeat: Infinity,
                 ease: "easeInOut",
               }}
+              whileHover={{
+                scale: 1.3,
+                rotate: 360,
+                transition: { duration: 0.6 },
+              }}
             >
-              {skill.level}%
+              {skill.icon}
             </motion.div>
             <span className="mt-2 text-xs md:text-sm font-medium text-foreground whitespace-nowrap">
               {skill.name}
