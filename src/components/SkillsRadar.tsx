@@ -5,15 +5,78 @@ const SkillsRadar = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   const skills = [
-    { name: "React.js", level: 90, color: "hsl(199, 89%, 48%)", icon: "⚛️" },
-    { name: "Node.js", level: 85, color: "hsl(142, 71%, 45%)", icon: "🟢" },
-    { name: "Next.js", level: 88, color: "hsl(0, 0%, 0%)", icon: "▲" },
-    { name: "Nest.js", level: 82, color: "hsl(0, 100%, 50%)", icon: "🐈" },
-    { name: "Spring Boot", level: 80, color: "hsl(142, 52%, 42%)", icon: "🍃" },
-    { name: "MongoDB", level: 75, color: "hsl(142, 78%, 35%)", icon: "🍃" },
-    { name: "Express.js", level: 83, color: "hsl(0, 0%, 30%)", icon: "⚡" },
-    { name: "TailwindCSS", level: 92, color: "hsl(199, 89%, 48%)", icon: "💨" },
-    { name: "Docker", level: 70, color: "hsl(197, 71%, 47%)", icon: "🐋" },
+    {
+      name: "React.js",
+      level: 90,
+      color: "hsl(199, 89%, 48%)",
+      icon: "⚛️",
+      x: 0,
+      y: -35,
+    },
+    {
+      name: "Node.js",
+      level: 85,
+      color: "hsl(142, 71%, 45%)",
+      icon: "🟢",
+      x: 30,
+      y: -20,
+    },
+    {
+      name: "Next.js",
+      level: 88,
+      color: "hsl(0, 0%, 0%)",
+      icon: "▲",
+      x: 35,
+      y: 10,
+    },
+    {
+      name: "Nest.js",
+      level: 82,
+      color: "hsl(0, 100%, 50%)",
+      icon: "🐈",
+      x: 20,
+      y: 30,
+    },
+    {
+      name: "Spring Boot",
+      level: 80,
+      color: "hsl(142, 52%, 42%)",
+      icon: "🍃",
+      x: -10,
+      y: 35,
+    },
+    {
+      name: "MongoDB",
+      level: 75,
+      color: "hsl(142, 78%, 35%)",
+      icon: "🍃",
+      x: -30,
+      y: 25,
+    },
+    {
+      name: "Express.js",
+      level: 83,
+      color: "hsl(0, 0%, 30%)",
+      icon: "⚡",
+      x: -35,
+      y: 0,
+    },
+    {
+      name: "TailwindCSS",
+      level: 92,
+      color: "hsl(199, 89%, 48%)",
+      icon: "💨",
+      x: -25,
+      y: -25,
+    },
+    {
+      name: "Docker",
+      level: 70,
+      color: "hsl(197, 71%, 47%)",
+      icon: "🐋",
+      x: 15,
+      y: -30,
+    },
   ];
 
   useEffect(() => {
@@ -39,18 +102,13 @@ const SkillsRadar = () => {
 
       {/* Skill Bubbles */}
       {skills.map((skill, idx) => {
-        const angle = (idx / skills.length) * Math.PI * 2 - Math.PI / 2;
-        const radius = (skill.level / 100) * 40; // percentage of container
-        const x = Math.cos(angle) * radius;
-        const y = Math.sin(angle) * radius;
-
         return (
           <motion.div
             key={skill.name}
             className="absolute flex flex-col items-center justify-center"
             style={{
-              left: `calc(50% + ${x}%)`,
-              top: `calc(50% + ${y}%)`,
+              left: `calc(50% + ${skill.x}%)`,
+              top: `calc(50% + ${skill.y}%)`,
               transform: "translate(-50%, -50%)",
             }}
             initial={{ scale: 0, opacity: 0 }}
