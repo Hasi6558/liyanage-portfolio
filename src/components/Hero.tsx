@@ -36,7 +36,7 @@ const Hero = () => {
             transition={{ delay: 0.4, duration: 0.6 }}
           >
             A results-driven Full-Stack Developer skilled in React, Node.js, and
-            Spring Boot. I love crafting seamless, scalable web experiences that
+            latest web technologies. I love crafting seamless, scalable web experiences that
             connect users and technology.
           </motion.p>
 

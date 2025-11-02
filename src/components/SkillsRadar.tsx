@@ -1,6 +1,18 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
+// Import all the SVG logos
+import reactLogo from "@/assets/logos/react.svg";
+import nodejsLogo from "@/assets/logos/nodejs.svg";
+import nextjsLogo from "@/assets/logos/nextjs.svg";
+import nestjsLogo from "@/assets/logos/nestjs.svg";
+import springLogo from "@/assets/logos/spring.svg";
+import mongodbLogo from "@/assets/logos/mongodb.svg";
+import expressLogo from "@/assets/logos/express.svg";
+import tailwindLogo from "@/assets/logos/tailwind.svg";
+import dockerLogo from "@/assets/logos/docker.svg";
+import postgresqlLogo from "@/assets/logos/postgresql.svg";
+
 const SkillsRadar = () => {
   const [isVisible, setIsVisible] = useState(false);
 
@@ -8,74 +20,82 @@ const SkillsRadar = () => {
     {
       name: "React.js",
       level: 90,
-      color: "hsl(199, 89%, 48%)",
-      icon: "⚛️",
-      x: 0,
-      y: -35,
+      color: "hsl(193, 95%, 68%)",
+      icon: reactLogo,
+      x: -4,
+      y: -45,
     },
     {
       name: "Node.js",
       level: 85,
       color: "hsl(142, 71%, 45%)",
-      icon: "🟢",
-      x: 30,
-      y: -20,
+      icon: nodejsLogo,
+      x: 20,
+      y: -15,
     },
     {
       name: "Next.js",
       level: 88,
-      color: "hsl(0, 0%, 0%)",
-      icon: "▲",
-      x: 35,
-      y: 10,
+      color: "hsl(0, 0%, 20%)",
+      icon: nextjsLogo,
+      x: -30,
+      y: -55,
     },
     {
       name: "Nest.js",
       level: 82,
-      color: "hsl(0, 100%, 50%)",
-      icon: "🐈",
+      color: "hsl(0, 84%, 60%)",
+      icon: nestjsLogo,
       x: 20,
-      y: 30,
+      y: -60,
     },
     {
       name: "Spring Boot",
       level: 80,
       color: "hsl(142, 52%, 42%)",
-      icon: "🍃",
-      x: -10,
-      y: 35,
+      icon: springLogo,
+      x: -50,
+      y: -12,
     },
     {
       name: "MongoDB",
       level: 75,
       color: "hsl(142, 78%, 35%)",
-      icon: "🍃",
-      x: -30,
-      y: 25,
+      icon: mongodbLogo,
+      x: -29,
+      y: -15,
     },
     {
       name: "Express.js",
       level: 83,
       color: "hsl(0, 0%, 30%)",
-      icon: "⚡",
-      x: -35,
-      y: 0,
+      icon: expressLogo,
+      x: -3,
+      y: 12,
     },
     {
       name: "TailwindCSS",
       level: 92,
       color: "hsl(199, 89%, 48%)",
-      icon: "💨",
-      x: -25,
-      y: -25,
+      icon: tailwindLogo,
+      x: -28,
+      y: 30,
     },
     {
       name: "Docker",
       level: 70,
       color: "hsl(197, 71%, 47%)",
-      icon: "🐋",
+      icon: dockerLogo,
       x: 15,
-      y: -30,
+      y: 30,
+    },
+    {
+      name: "PostgreSQL",
+      level: 78,
+      color: "hsl(211, 100%, 50%)",
+      icon: postgresqlLogo,
+      x: 40,
+      y: -10,
     },
   ];
 
@@ -117,7 +137,7 @@ const SkillsRadar = () => {
             whileHover={{ scale: 1.2 }}
           >
             <motion.div
-              className="w-20 h-20 md:w-24 md:h-24 rounded-full flex items-center justify-center text-4xl md:text-5xl shadow-lg backdrop-blur-sm border-2"
+              className="w-20 h-20 md:w-24 md:h-24 rounded-full flex items-center justify-center shadow-lg backdrop-blur-sm border-2 p-3"
               style={{
                 backgroundColor: `${skill.color}20`,
                 borderColor: skill.color,
@@ -140,7 +160,14 @@ const SkillsRadar = () => {
                 transition: { duration: 0.6 },
               }}
             >
-              {skill.icon}
+              <img
+                src={skill.icon}
+                alt={skill.name}
+                className="w-full h-full object-contain"
+                style={{
+                  filter: `brightness(1.1) contrast(1.05)`,
+                }}
+              />
             </motion.div>
             <span className="mt-2 text-xs md:text-sm font-medium text-foreground whitespace-nowrap">
               {skill.name}

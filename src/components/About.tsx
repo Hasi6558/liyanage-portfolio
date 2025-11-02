@@ -40,10 +40,11 @@ const About = () => {
             viewport={{ once: true }}
             transition={{ delay: 0.2, duration: 0.6 }}
           >
-            I'm an <span className="text-primary font-semibold">Electronics and Computer Science</span> undergraduate 
-            at the <span className="text-primary font-semibold">University of Kelaniya</span> with a strong interest in 
-            full-stack web development and cloud integration. I specialize in building modern, responsive web applications 
-            using <span className="text-primary font-semibold">React, Node.js, and Spring Boot</span>. 
+
+              I'm a <span className="text-primary font-semibold">Full-Stack Developer</span> with a strong interest in
+              <span className="text-primary font-semibold"> full-stack web development</span> and
+              <span className="text-primary font-semibold"> cloud integration</span>. I specialize in building modern, responsive web applications
+              using <span className="text-primary font-semibold">React, Node.js, and Spring Boot</span>.
           </motion.p>
           <motion.p
             className="text-lg leading-relaxed text-foreground/90 mt-4"
@@ -53,7 +54,7 @@ const About = () => {
             transition={{ delay: 0.4, duration: 0.6 }}
           >
             My focus is writing <span className="text-primary font-semibold">clean, maintainable code</span> and 
-            delivering engaging, high-performance user experiences. I'm passionate about leveraging cutting-edge 
+            delivering engaging, high performance user experiences. I'm passionate about leveraging cutting edge
             technologies to solve real-world problems and create impactful digital solutions.
           </motion.p>
         </motion.div>

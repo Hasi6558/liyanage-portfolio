@@ -5,7 +5,7 @@ import Projects from "@/components/Projects";
 import Experience from "@/components/Experience";
 import Education from "@/components/Education";
 import Certifications from "@/components/Certifications";
-import Volunteering from "@/components/Volunteering";
+// import Volunteering from "@/components/Volunteering";
 import Testimonials from "@/components/Testimonials";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
@@ -26,7 +26,7 @@ const Index = () => {
       <Experience />
       <Education />
       <Certifications />
-      <Volunteering />
+      {/*<Volunteering />*/}
       <Testimonials />
       <Contact />
       <Footer />
