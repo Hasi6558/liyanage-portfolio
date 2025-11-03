@@ -214,4 +214,74 @@ All colors MUST be HSL.
   .hide-scrollbar::-webkit-scrollbar {
     display: none; /* Safari and Chrome */
   }
+
+  /* Mobile-specific performance optimizations */
+  @media (max-width: 768px) {
+    /* Reduce backdrop blur on mobile for better performance */
+    .backdrop-blur-sm {
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+    }
+
+    .backdrop-blur-md {
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+
+    .backdrop-blur-lg {
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    /* Optimize scrolling on mobile */
+    .hide-scrollbar {
+      -webkit-overflow-scrolling: touch;
+    }
+
+    /* Enable GPU acceleration on mobile */
+    .glass-card,
+    .hover-glow,
+    .hover-lift {
+      transform: translate3d(0, 0, 0);
+      will-change: transform;
+    }
+
+    /* Simplify animations on mobile */
+    .animate-float {
+      animation: float-mobile 4s ease-in-out infinite;
+    }
+
+    @keyframes float-mobile {
+      0%,
+      100% {
+        transform: translate3d(0, 0, 0);
+      }
+      50% {
+        transform: translate3d(0, -10px, 0);
+      }
+    }
+
+    .animate-gradient {
+      animation: gradient-mobile 6s ease infinite;
+    }
+
+    @keyframes gradient-mobile {
+      0%,
+      100% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+    }
+
+    /* Reduce shadow complexity on mobile */
+    .hover-glow:hover {
+      box-shadow: 0 0 20px hsla(199, 89%, 48%, 0.3);
+    }
+
+    .glass-card {
+      box-shadow: 0 5px 20px -5px hsla(199, 89%, 48%, 0.15);
+    }
+  }
 }

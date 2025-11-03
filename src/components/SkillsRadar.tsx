@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 // Import all the SVG logos
 import reactLogo from "@/assets/logos/react.svg";
@@ -15,6 +16,7 @@ import postgresqlLogo from "@/assets/logos/postgresql.svg";
 
 const SkillsRadar = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const isMobile = useIsMobile();
 
   const skills = [
     {
@@ -116,7 +118,7 @@ const SkillsRadar = () => {
           }}
           initial={{ scale: 0, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
-          transition={{ delay: idx * 0.1, duration: 0.6 }}
+          transition={{ delay: idx * 0.1, duration: isMobile ? 0.3 : 0.6 }}
         />
       ))}
 
@@ -129,12 +131,16 @@ const SkillsRadar = () => {
             style={{
               left: `calc(50% + ${skill.x}%)`,
               top: `calc(50% + ${skill.y}%)`,
-              transform: "translate(-50%, -50%)",
+              transform: "translate3d(-50%, -50%, 0)",
+              willChange: isMobile ? "transform" : "auto",
             }}
             initial={{ scale: 0, opacity: 0 }}
             animate={isVisible ? { scale: 1, opacity: 1 } : {}}
-            transition={{ delay: 0.5 + idx * 0.1, duration: 0.6 }}
-            whileHover={{ scale: 1.2 }}
+            transition={{
+              delay: 0.5 + idx * 0.1,
+              duration: isMobile ? 0.3 : 0.6,
+            }}
+            whileHover={!isMobile ? { scale: 1.2 } : undefined}
           >
             <motion.div
               className="w-20 h-20 md:w-24 md:h-24 rounded-full flex items-center justify-center shadow-lg backdrop-blur-sm border-2 p-3"
@@ -143,30 +149,44 @@ const SkillsRadar = () => {
                 borderColor: skill.color,
               }}
               animate={{
-                boxShadow: [
-                  `0 0 20px ${skill.color}40`,
-                  `0 0 40px ${skill.color}60`,
-                  `0 0 20px ${skill.color}40`,
-                ],
+                boxShadow: isMobile
+                  ? [
+                      `0 0 10px ${skill.color}30`,
+                      `0 0 20px ${skill.color}50`,
+                      `0 0 10px ${skill.color}30`,
+                    ]
+                  : [
+                      `0 0 20px ${skill.color}40`,
+                      `0 0 40px ${skill.color}60`,
+                      `0 0 20px ${skill.color}40`,
+                    ],
               }}
               transition={{
-                duration: 2,
+                duration: isMobile ? 2.5 : 2,
                 repeat: Infinity,
                 ease: "easeInOut",
               }}
-              whileHover={{
-                scale: 1.3,
-                rotate: 360,
-                transition: { duration: 0.6 },
-              }}
+              whileHover={
+                !isMobile
+                  ? {
+                      scale: 1.3,
+                      rotate: 360,
+                      transition: { duration: 0.6 },
+                    }
+                  : undefined
+              }
             >
               <img
                 src={skill.icon}
                 alt={skill.name}
                 className="w-full h-full object-contain"
                 style={{
-                  filter: `brightness(1.1) contrast(1.05)`,
+                  filter: isMobile
+                    ? "brightness(1.05) contrast(1.02)"
+                    : "brightness(1.1) contrast(1.05)",
                 }}
+                loading="lazy"
+                decoding="async"
               />
             </motion.div>
             <span className="mt-2 text-xs md:text-sm font-medium text-foreground whitespace-nowrap">
@@ -180,15 +200,21 @@ const SkillsRadar = () => {
       <motion.div
         className="absolute w-4 h-4 rounded-full bg-primary"
         animate={{
-          scale: [1, 1.3, 1],
-          boxShadow: [
-            "0 0 10px hsl(199, 89%, 48%)",
-            "0 0 30px hsl(199, 89%, 48%)",
-            "0 0 10px hsl(199, 89%, 48%)",
-          ],
+          scale: isMobile ? [1, 1.2, 1] : [1, 1.3, 1],
+          boxShadow: isMobile
+            ? [
+                "0 0 8px hsl(199, 89%, 48%)",
+                "0 0 20px hsl(199, 89%, 48%)",
+                "0 0 8px hsl(199, 89%, 48%)",
+              ]
+            : [
+                "0 0 10px hsl(199, 89%, 48%)",
+                "0 0 30px hsl(199, 89%, 48%)",
+                "0 0 10px hsl(199, 89%, 48%)",
+              ],
         }}
         transition={{
-          duration: 2,
+          duration: isMobile ? 1.5 : 2,
           repeat: Infinity,
           ease: "easeInOut",
         }}
