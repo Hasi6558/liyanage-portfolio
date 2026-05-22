@@ -8,61 +8,61 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 222 47% 11%;
-    --foreground: 214 32% 91%;
+    --background: 225 50% 8%;
+    --foreground: 210 40% 96%;
 
-    --card: 222 47% 15%;
-    --card-foreground: 214 32% 91%;
+    --card: 221 39% 11%;
+    --card-foreground: 210 40% 96%;
 
-    --popover: 222 47% 13%;
-    --popover-foreground: 214 32% 91%;
+    --popover: 221 39% 11%;
+    --popover-foreground: 210 40% 96%;
 
-    --primary: 199 89% 48%;
-    --primary-foreground: 222 47% 11%;
+    --primary: 190 100% 50%;
+    --primary-foreground: 225 50% 8%;
 
-    --secondary: 222 47% 18%;
-    --secondary-foreground: 214 32% 91%;
+    --secondary: 191 100% 37%;
+    --secondary-foreground: 225 50% 8%;
 
-    --muted: 222 47% 20%;
-    --muted-foreground: 214 20% 65%;
+    --muted: 220 31% 17%;
+    --muted-foreground: 215 16% 47%;
 
-    --accent: 199 89% 48%;
-    --accent-foreground: 222 47% 11%;
+    --accent: 190 100% 50%;
+    --accent-foreground: 225 50% 8%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 214 32% 91%;
 
-    --border: 222 47% 20%;
-    --input: 222 47% 18%;
-    --ring: 199 89% 48%;
+    --border: 190 100% 50% / 0.15;
+    --input: 221 39% 13%;
+    --ring: 190 100% 50%;
 
     --radius: 0.75rem;
 
     /* Custom gradient tokens */
     --gradient-primary: linear-gradient(
       135deg,
-      hsl(199, 89%, 48%),
-      hsl(199, 89%, 68%)
+      hsl(190, 100%, 50%),
+      hsl(191, 100%, 37%)
     );
     --gradient-card: linear-gradient(
       135deg,
-      hsl(222, 47%, 15%),
-      hsl(222, 47%, 18%)
+      hsl(221, 39%, 11%),
+      hsl(220, 31%, 17%)
     );
     --gradient-hero: linear-gradient(
       180deg,
-      hsl(222, 47%, 11%) 0%,
-      hsl(222, 47%, 15%) 100%
+      hsl(225, 50%, 8%) 0%,
+      hsl(221, 39%, 11%) 100%
     );
 
     /* Glassmorphism */
-    --glass-bg: hsla(222, 47%, 15%, 0.5);
-    --glass-border: hsla(214, 32%, 91%, 0.1);
+    --glass-bg: hsla(221, 39%, 11%, 0.72);
+    --glass-border: hsla(190, 100%, 50%, 0.15);
 
     /* Shadows */
-    --shadow-glow: 0 0 40px hsla(199, 89%, 48%, 0.3);
-    --shadow-card: 0 10px 40px -10px hsla(199, 89%, 48%, 0.2);
-    --shadow-elevated: 0 20px 60px -15px hsla(199, 89%, 48%, 0.4);
+    --shadow-glow: 0 0 40px hsla(190, 100%, 50%, 0.3);
+    --shadow-card: 0 10px 40px -10px hsla(190, 100%, 50%, 0.18);
+    --shadow-elevated: 0 20px 60px -15px hsla(190, 100%, 50%, 0.35);
 
     /* Animation */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -78,7 +78,7 @@ All colors MUST be HSL.
     --popover: 0 0% 100%;
     --popover-foreground: 222 47% 11%;
 
-    --primary: 199 89% 48%;
+    --primary: 190 100% 50%;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 214 32% 95%;
@@ -87,7 +87,7 @@ All colors MUST be HSL.
     --muted: 214 32% 95%;
     --muted-foreground: 222 47% 45%;
 
-    --accent: 199 89% 48%;
+    --accent: 190 100% 50%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
@@ -95,7 +95,7 @@ All colors MUST be HSL.
 
     --border: 214 32% 85%;
     --input: 214 32% 85%;
-    --ring: 199 89% 48%;
+    --ring: 190 100% 50%;
 
     --glass-bg: hsla(0, 0%, 100%, 0.7);
     --glass-border: hsla(222, 47%, 11%, 0.1);
@@ -123,7 +123,7 @@ All colors MUST be HSL.
 
 @layer components {
   .glass-card {
-    @apply backdrop-blur-lg border border-white/10 rounded-xl;
+    @apply backdrop-blur-lg border border-border/60 rounded-xl;
     background: var(--glass-bg);
     box-shadow: var(--shadow-card);
   }
@@ -138,17 +138,25 @@ All colors MUST be HSL.
   }
 
   .hover-lift {
-    @apply transition-all duration-300 hover:-translate-y-2;
     transition: var(--transition-smooth);
+  }
+
+  /* Only apply lift effect on larger screens */
+  @media (min-width: 768px) {
+    .hover-lift:hover {
+      @apply -translate-y-2;
+    }
   }
 
   .hover-glow {
-    @apply transition-all duration-300;
     transition: var(--transition-smooth);
   }
 
-  .hover-glow:hover {
-    box-shadow: var(--shadow-glow);
+  /* Only apply glow effect on larger screens */
+  @media (min-width: 768px) {
+    .hover-glow:hover {
+      box-shadow: var(--shadow-glow);
+    }
   }
 
   .section-padding {
@@ -159,6 +167,13 @@ All colors MUST be HSL.
 @layer utilities {
   .animate-float {
     animation: float 6s ease-in-out infinite;
+  }
+
+  /* Disable float animation on mobile */
+  @media (max-width: 767px) {
+    .animate-float {
+      animation: none;
+    }
   }
 
   @keyframes float {
@@ -176,6 +191,14 @@ All colors MUST be HSL.
     animation: gradient 8s ease infinite;
   }
 
+  /* Disable gradient animation on mobile */
+  @media (max-width: 767px) {
+    .animate-gradient {
+      animation: none;
+      background-position: 0% 50%;
+    }
+  }
+
   @keyframes gradient {
     0%,
     100% {
@@ -190,14 +213,28 @@ All colors MUST be HSL.
     cursor: pointer;
   }
 
-  .cursor-hover:hover {
-    box-shadow: var(--shadow-glow);
+  /* Only apply cursor hover effect on larger screens */
+  @media (min-width: 768px) {
+    .cursor-hover:hover {
+      box-shadow: var(--shadow-glow);
+    }
   }
 
   /* Smooth transitions for theme switching */
   * {
     transition: background-color 0.3s ease, color 0.3s ease,
       border-color 0.3s ease;
+  }
+
+  /* Reduce motion for users who prefer it */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 
   /* Prevent transition on theme switch for specific properties */

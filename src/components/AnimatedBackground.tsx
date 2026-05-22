@@ -1,6 +1,30 @@
 import { motion } from "framer-motion";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const AnimatedBackground = () => {
+  const isMobile = useIsMobile();
+
+  // On mobile, use static background with minimal animations
+  if (isMobile) {
+    return (
+      <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
+        {/* Static Gradient Background for mobile */}
+        <div
+          className="absolute inset-0 opacity-20"
+          style={{
+            background:
+              "radial-gradient(circle at 50% 50%, hsl(190, 100%, 50%) 0%, transparent 50%), radial-gradient(circle at 80% 20%, hsl(191, 100%, 37%) 0%, transparent 50%)",
+          }}
+        />
+        {/* Single static orb for mobile */}
+        <div
+          className="absolute top-20 left-10 w-64 h-64 rounded-full blur-3xl opacity-15"
+          style={{ background: "hsl(190, 100%, 50%)" }}
+        />
+      </div>
+    );
+  }
+
   return (
     <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
       {/* Flowing Gradient Waves */}
@@ -16,7 +40,8 @@ const AnimatedBackground = () => {
           ease: "linear",
         }}
         style={{
-          background: "radial-gradient(circle at 50% 50%, hsl(199, 89%, 48%) 0%, transparent 50%), radial-gradient(circle at 80% 20%, hsl(199, 89%, 68%) 0%, transparent 50%)",
+          background:
+            "radial-gradient(circle at 50% 50%, hsl(190, 100%, 50%) 0%, transparent 50%), radial-gradient(circle at 80% 20%, hsl(191, 100%, 37%) 0%, transparent 50%)",
           backgroundSize: "200% 200%",
         }}
       />
@@ -24,7 +49,7 @@ const AnimatedBackground = () => {
       {/* Animated Orbs */}
       <motion.div
         className="absolute top-20 left-10 w-96 h-96 rounded-full blur-3xl opacity-20"
-        style={{ background: "hsl(199, 89%, 48%)" }}
+        style={{ background: "hsl(190, 100%, 50%)" }}
         animate={{
           x: [0, 100, 0],
           y: [0, 50, 0],
@@ -39,7 +64,7 @@ const AnimatedBackground = () => {
 
       <motion.div
         className="absolute bottom-20 right-10 w-[32rem] h-[32rem] rounded-full blur-3xl opacity-15"
-        style={{ background: "hsl(199, 89%, 68%)" }}
+        style={{ background: "hsl(191, 100%, 37%)" }}
         animate={{
           x: [0, -80, 0],
           y: [0, -60, 0],

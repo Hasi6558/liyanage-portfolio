@@ -1,33 +1,29 @@
 import { Button } from "@/components/ui/button";
 import { Github, Linkedin, Mail } from "lucide-react";
-import { motion, useReducedMotion } from "framer-motion";
-import profileImage from "@/assets/profile.svg";
+import { motion } from "framer-motion";
 import { useIsMobile } from "@/hooks/use-mobile";
+import profileImage from "@/assets/profile.svg";
 
 const Hero = () => {
   const isMobile = useIsMobile();
-  const prefersReducedMotion = useReducedMotion();
 
-  // Mobile-optimized animation settings
-  const animationDuration = isMobile ? 0.3 : 0.8;
-  const shouldAnimate = !prefersReducedMotion && !isMobile;
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden section-padding">
       <div className="relative z-10 max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
         {/* Text Content */}
         <motion.div
           className="space-y-6"
-          initial={{ opacity: 0, x: isMobile ? -20 : -50 }}
+          initial={{ opacity: 0, x: isMobile ? 0 : -50 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: animationDuration, ease: "easeOut" }}
+          transition={{ duration: isMobile ? 0.3 : 0.8, ease: "easeOut" }}
         >
           <motion.div
             className="space-y-2"
-            initial={{ opacity: 0, y: isMobile ? 10 : 20 }}
+            initial={{ opacity: 0, y: isMobile ? 0 : 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{
-              delay: isMobile ? 0.1 : 0.2,
-              duration: animationDuration,
+              delay: isMobile ? 0 : 0.2,
+              duration: isMobile ? 0.3 : 0.6,
             }}
           >
             <p className="text-primary font-medium text-lg">Hi, I'm</p>
@@ -44,8 +40,8 @@ const Hero = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{
-              delay: isMobile ? 0.2 : 0.4,
-              duration: animationDuration,
+              delay: isMobile ? 0 : 0.4,
+              duration: isMobile ? 0.3 : 0.6,
             }}
           >
             A results-driven Full-Stack Developer skilled in React, Node.js, and
@@ -55,11 +51,11 @@ const Hero = () => {
 
           <motion.div
             className="flex flex-wrap gap-4 pt-4"
-            initial={{ opacity: 0, y: isMobile ? 10 : 20 }}
+            initial={{ opacity: 0, y: isMobile ? 0 : 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{
-              delay: isMobile ? 0.3 : 0.6,
-              duration: animationDuration,
+              delay: isMobile ? 0 : 0.6,
+              duration: isMobile ? 0.3 : 0.6,
             }}
           >
             <Button
@@ -72,13 +68,16 @@ const Hero = () => {
               }
             >
               Contact Me
-              <motion.span
-                className="inline-block ml-2"
-                animate={{ x: [0, 5, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
-              >
-                →
-              </motion.span>
+              {!isMobile && (
+                <motion.span
+                  className="inline-block ml-2"
+                  animate={{ x: [0, 5, 0] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                >
+                  →
+                </motion.span>
+              )}
+              {isMobile && <span className="inline-block ml-2">→</span>}
             </Button>
             <Button
               size="lg"
@@ -100,8 +99,8 @@ const Hero = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{
-              delay: isMobile ? 0.4 : 0.8,
-              duration: animationDuration,
+              delay: isMobile ? 0 : 0.8,
+              duration: isMobile ? 0.3 : 0.6,
             }}
           >
             {[
@@ -124,7 +123,7 @@ const Hero = () => {
                     : "noopener noreferrer"
                 }
                 className="p-3 glass-card rounded-full cursor-hover"
-                whileHover={{ scale: 1.1, rotate: 5 }}
+                whileHover={isMobile ? {} : { scale: 1.1, rotate: 5 }}
                 whileTap={{ scale: 0.95 }}
               >
                 <social.icon className="w-6 h-6 text-foreground" />
@@ -138,23 +137,23 @@ const Hero = () => {
           className="relative"
           initial={{
             opacity: 0,
-            scale: isMobile ? 0.9 : 0.8,
-            y: isMobile ? 20 : 50,
+            scale: isMobile ? 1 : 0.8,
+            y: isMobile ? 0 : 50,
           }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{
-            delay: isMobile ? 0.2 : 0.3,
-            duration: animationDuration,
+            delay: isMobile ? 0 : 0.3,
+            duration: isMobile ? 0.3 : 0.8,
             ease: "easeOut",
           }}
         >
-          {/* Animated Lighting Background - Simplified for mobile */}
+          {/* Animated Lighting Background - disabled on mobile */}
           {!isMobile && (
             <motion.div
               className="absolute inset-0 rounded-full"
               style={{
                 background:
-                  "conic-gradient(from 0deg, #0ea5e9, #06b6d4, #8b5cf6, #a855f7, #ec4899, #f43f5e, #0ea5e9)",
+                  "conic-gradient(from 0deg, hsl(var(--primary)), hsl(var(--secondary)), hsl(var(--card)), hsl(var(--primary)))",
                 filter: "blur(20px)",
               }}
               animate={{
@@ -168,71 +167,62 @@ const Hero = () => {
             />
           )}
 
-          {/* Static gradient for mobile */}
-          {isMobile && (
-            <div
-              className="absolute inset-0 rounded-full opacity-40"
-              style={{
-                background:
-                  "radial-gradient(circle, #0ea5e9, #8b5cf6, #ec4899)",
-                filter: "blur(15px)",
+          {/* Secondary pulsing glow - static on mobile */}
+          {isMobile ? (
+            <div className="absolute inset-0 gradient-primary rounded-full blur-2xl opacity-30" />
+          ) : (
+            <motion.div
+              className="absolute inset-0 gradient-primary rounded-full blur-2xl opacity-30"
+              animate={{
+                scale: [1, 1.3, 1],
+                opacity: [0.3, 0.6, 0.3],
+              }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+                ease: "easeInOut",
               }}
             />
           )}
 
-          {/* Secondary pulsing glow */}
-          <motion.div
-            className="absolute inset-0 gradient-primary rounded-full blur-2xl opacity-30"
-            animate={{
-              scale: isMobile ? [1, 1.1, 1] : [1, 1.3, 1],
-              opacity: [0.3, 0.5, 0.3],
-            }}
-            transition={{
-              duration: isMobile ? 2 : 3,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          />
-
           {/* Profile Image Container */}
           <motion.div
             className="relative z-10 p-2 rounded-full bg-background/80 backdrop-blur-sm"
-            whileHover={!isMobile ? { scale: 1.05 } : undefined}
+            whileHover={isMobile ? {} : { scale: 1.05 }}
             transition={{ type: "spring", stiffness: 300, damping: 20 }}
           >
             <motion.img
               src={profileImage}
               alt="Hasindu Liyanage"
-              className="w-full h-auto rounded-full object-cover border-2 border-white/20 shadow-2xl"
-              whileHover={!isMobile ? { scale: 1.02 } : undefined}
+              className="w-full h-auto rounded-full object-cover border-2 border-border/60 shadow-2xl"
+              whileHover={isMobile ? {} : { scale: 1.02 }}
               transition={{ duration: 0.3 }}
-              loading="eager"
-              decoding="async"
             />
           </motion.div>
 
-          {/* Floating particles - Reduced on mobile */}
-          {[...Array(isMobile ? 3 : 6)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute w-2 h-2 bg-primary/60 rounded-full"
-              style={{
-                left: `${20 + ((i * 60) % 80)}%`,
-                top: `${15 + ((i * 35) % 70)}%`,
-              }}
-              animate={{
-                y: isMobile ? [-5, -15, -5] : [-10, -30, -10],
-                opacity: [0.3, 0.8, 0.3],
-                scale: [0.5, 1, 0.5],
-              }}
-              transition={{
-                duration: isMobile ? 1.5 + i * 0.2 : 2 + i * 0.3,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: i * 0.2,
-              }}
-            />
-          ))}
+          {/* Floating particles - disabled on mobile */}
+          {!isMobile &&
+            [...Array(6)].map((_, i) => (
+              <motion.div
+                key={i}
+                className="absolute w-2 h-2 bg-primary/60 rounded-full"
+                style={{
+                  left: `${20 + ((i * 60) % 80)}%`,
+                  top: `${15 + ((i * 35) % 70)}%`,
+                }}
+                animate={{
+                  y: [-10, -30, -10],
+                  opacity: [0.3, 0.8, 0.3],
+                  scale: [0.5, 1, 0.5],
+                }}
+                transition={{
+                  duration: 2 + i * 0.3,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: i * 0.2,
+                }}
+              />
+            ))}
         </motion.div>
       </div>
     </section>
