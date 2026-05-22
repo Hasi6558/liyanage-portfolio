@@ -2,12 +2,10 @@ import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Star } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
-import { useIsMobile } from "@/hooks/use-mobile";
 
 const Testimonials = () => {
   const [isHovered, setIsHovered] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
-  const isMobile = useIsMobile();
 
   const testimonials = [
     {
@@ -59,73 +57,32 @@ const Testimonials = () => {
     const scrollContainer = scrollRef.current;
     if (!scrollContainer || isHovered) return;
 
-    const scrollWidth = scrollContainer.scrollWidth / 2;
+    const scrollWidth = scrollContainer.scrollWidth / 2; // Half because we duplicated
+    let scrollPosition = 0;
 
-    // Use requestAnimationFrame on mobile for better performance
-    if (isMobile) {
-      let animationFrameId: number;
-      let lastTimestamp = 0;
-      let scrollPosition = scrollContainer.scrollLeft;
-
-      const scroll = (timestamp: number) => {
-        if (isHovered) {
-          animationFrameId = requestAnimationFrame(scroll);
-          return;
+    const scroll = () => {
+      if (!isHovered) {
+        scrollPosition += 1;
+        if (scrollPosition >= scrollWidth) {
+          scrollPosition = 0;
         }
+        scrollContainer.scrollLeft = scrollPosition;
+      }
+    };
 
-        if (!lastTimestamp) lastTimestamp = timestamp;
-        const delta = timestamp - lastTimestamp;
-
-        // Scroll at 60fps (~16ms per frame)
-        if (delta >= 16) {
-          scrollPosition += 0.5; // Slower on mobile
-
-          if (scrollPosition >= scrollWidth) {
-            scrollPosition = 0;
-          }
-
-          if (scrollContainer) {
-            scrollContainer.scrollLeft = scrollPosition;
-          }
-
-          lastTimestamp = timestamp;
-        }
-
-        animationFrameId = requestAnimationFrame(scroll);
-      };
-
-      animationFrameId = requestAnimationFrame(scroll);
-      return () => cancelAnimationFrame(animationFrameId);
-    } else {
-      // Desktop: use setInterval (current implementation)
-      let scrollPosition = 0;
-
-      const scroll = () => {
-        if (!isHovered) {
-          scrollPosition += 1;
-          if (scrollPosition >= scrollWidth) {
-            scrollPosition = 0;
-          }
-          if (scrollContainer) {
-            scrollContainer.scrollLeft = scrollPosition;
-          }
-        }
-      };
-
-      const interval = setInterval(scroll, 30);
-      return () => clearInterval(interval);
-    }
-  }, [isHovered, isMobile]);
+    const interval = setInterval(scroll, 30);
+    return () => clearInterval(interval);
+  }, [isHovered]);
 
   return (
     <section id="testimonials" className="section-padding overflow-hidden">
       <div className="max-w-7xl mx-auto">
         <motion.div
           className="text-center mb-12"
-          initial={{ opacity: 0, y: isMobile ? 10 : 20 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: isMobile ? 0.3 : 0.6 }}
+          transition={{ duration: 0.6 }}
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
             Client <span className="gradient-text">Feedback</span>
@@ -155,23 +112,19 @@ const Testimonials = () => {
               <motion.div
                 key={`${testimonial.name}-${idx}`}
                 className="flex-shrink-0 w-80"
-                initial={{ opacity: 0, y: isMobile ? 20 : 40 }}
+                initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{
-                  duration: isMobile ? 0.3 : 0.6,
+                  duration: 0.6,
                   delay: (idx % testimonials.length) * 0.1,
                 }}
               >
                 <motion.div
-                  whileHover={
-                    !isMobile
-                      ? {
-                          scale: 1.05,
-                          y: -10,
-                        }
-                      : undefined
-                  }
+                  whileHover={{
+                    scale: 1.05,
+                    y: -10,
+                  }}
                   transition={{ type: "spring", stiffness: 300, damping: 20 }}
                 >
                   <Card className="glass-card hover-glow h-full">
@@ -181,17 +134,11 @@ const Testimonials = () => {
                           src={testimonial.image}
                           alt={testimonial.name}
                           className="w-16 h-16 rounded-full border-2 border-primary/30"
-                          whileHover={
-                            !isMobile
-                              ? {
-                                  scale: 1.1,
-                                  rotate: 360,
-                                }
-                              : undefined
-                          }
-                          transition={{ duration: isMobile ? 0.3 : 0.6 }}
-                          loading="lazy"
-                          decoding="async"
+                          whileHover={{
+                            scale: 1.1,
+                            rotate: 360,
+                          }}
+                          transition={{ duration: 0.6 }}
                         />
                         <div>
                           <h4 className="font-semibold text-foreground">
