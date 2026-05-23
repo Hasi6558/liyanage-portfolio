@@ -1,5 +1,4 @@
 import Hero from "@/components/Hero";
-import About from "@/components/About";
 import Skills from "@/components/Skills";
 import Projects from "@/components/Projects";
 import Experience from "@/components/Experience";
@@ -12,6 +11,7 @@ import Footer from "@/components/Footer";
 import ThemeToggle from "@/components/ThemeToggle";
 import AnimatedBackground from "@/components/AnimatedBackground";
 import CursorEffect from "@/components/CursorEffect";
+import About from "@/components/About.tsx";
 
 const Index = () => {
   return (
@@ -21,8 +21,8 @@ const Index = () => {
       <ThemeToggle />
       <Hero />
       <About />
-      <Skills />
       <Projects />
+      <Skills />
       <Experience />
       <Education />
       <Certifications />

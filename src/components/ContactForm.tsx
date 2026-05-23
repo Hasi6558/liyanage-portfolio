@@ -4,29 +4,73 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Check, Sparkles } from "lucide-react";
+import emailjs from "@emailjs/browser";
+import { toast } from "@/hooks/use-toast";
 
 const ContactForm = () => {
-  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [formData, setFormData] = useState({
+    title: "",
+    name: "",
+    email: "",
+    message: "",
+  });
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [confetti, setConfetti] = useState<Array<{ id: number; x: number; y: number }>>([]);
+  const [isSending, setIsSending] = useState(false);
+  const [confetti, setConfetti] = useState<
+    Array<{ id: number; x: number; y: number }>
+  >([]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitted(true);
+    if (isSending) return;
+    setIsSending(true);
 
-    // Generate confetti
-    const newConfetti = Array.from({ length: 30 }, (_, i) => ({
-      id: i,
-      x: Math.random() * 100,
-      y: Math.random() * 100,
-    }));
-    setConfetti(newConfetti);
+    const serviceId =
+      import.meta.env.VITE_EMAIL_SERVICE_ID || import.meta.env.EMAIL_SERVICE_ID;
+    const templateId =
+      import.meta.env.VITE_EMAIL_TEMPLATE_ID ||
+      import.meta.env.EMAIL_TEMPLATE_ID;
+    const publicKey =
+      import.meta.env.VITE_EMAIL_PUBLIC_KEY || import.meta.env.EMAIL_PUBLIC_KEY;
 
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setConfetti([]);
-      setFormData({ name: "", email: "", message: "" });
-    }, 3000);
+    const templateParams = {
+      title: `A Message Received to Portfolio Site`,
+      from_name: formData.name,
+      from_email: formData.email,
+      message: formData.message,
+    };
+
+    try {
+      await emailjs.send(serviceId, templateId, templateParams, publicKey);
+
+      // success UI
+      setIsSubmitted(true);
+      const newConfetti = Array.from({ length: 30 }, (_, i) => ({
+        id: i,
+        x: Math.random() * 100,
+        y: Math.random() * 100,
+      }));
+      setConfetti(newConfetti);
+
+      setTimeout(() => {
+        setIsSubmitted(false);
+        setConfetti([]);
+        setFormData({ title: "", name: "", email: "", message: "" });
+      }, 3000);
+
+      toast({
+        title: "Message sent",
+        description: "I'll get back to you soon.",
+      });
+    } catch (err) {
+      console.error("EmailJS send error:", err);
+      toast({
+        title: "Send failed",
+        description: "Could not send message. Try again later.",
+      });
+    } finally {
+      setIsSending(false);
+    }
   };
 
   return (
@@ -79,7 +123,9 @@ const ContactForm = () => {
                 >
                   <Check className="w-12 h-12 text-primary" />
                 </motion.div>
-                <h3 className="text-2xl font-bold text-primary mb-2">Message Sent!</h3>
+                <h3 className="text-2xl font-bold text-primary mb-2">
+                  Message Sent!
+                </h3>
                 <p className="text-foreground/80">I'll get back to you soon.</p>
               </motion.div>
             </motion.div>
@@ -134,7 +180,9 @@ const ContactForm = () => {
             type="email"
             placeholder="Your Email"
             value={formData.email}
-            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+            onChange={(e) =>
+              setFormData({ ...formData, email: e.target.value })
+            }
             className="glass-card border-primary/20 focus:border-primary"
             required
           />
@@ -149,7 +197,9 @@ const ContactForm = () => {
           <Textarea
             placeholder="Your Message"
             value={formData.message}
-            onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+            onChange={(e) =>
+              setFormData({ ...formData, message: e.target.value })
+            }
             className="glass-card border-primary/20 focus:border-primary min-h-[150px]"
             required
           />
@@ -165,9 +215,12 @@ const ContactForm = () => {
             <Button
               type="submit"
               size="lg"
+              disabled={isSending}
               className="w-full gradient-primary hover-glow relative overflow-hidden group"
             >
-              <span className="relative z-10">Send Message</span>
+              <span className="relative z-10">
+                {isSending ? "Sending..." : "Send Message"}
+              </span>
               <motion.div
                 className="absolute inset-0 bg-white/20"
                 initial={{ x: "-100%" }}

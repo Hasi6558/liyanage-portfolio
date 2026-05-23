@@ -20,7 +20,7 @@ const Contact = () => {
           </h2>
           <div className="w-20 h-1 gradient-primary mx-auto rounded-full" />
         </motion.div>
-        
+
         <motion.p
           className="text-lg text-center text-foreground/80 mb-8 leading-relaxed"
           initial={{ opacity: 0 }}
@@ -28,8 +28,10 @@ const Contact = () => {
           viewport={{ once: true }}
           transition={{ delay: 0.2, duration: 0.6 }}
         >
-          I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
-          Whether you're looking for a freelance developer, a full-time team member, or just want to connect — feel free to reach out!
+          I'm always open to discussing new projects, creative ideas, or
+          opportunities to be part of your vision. Whether you're looking for a
+          freelance developer, a full-time team member, or just want to connect
+          feel free to reach out!
         </motion.p>
 
         <ContactForm />
@@ -65,7 +67,11 @@ const Contact = () => {
               key={idx}
               href={contact.href}
               target={contact.href.startsWith("mailto:") ? undefined : "_blank"}
-              rel={contact.href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
+              rel={
+                contact.href.startsWith("mailto:") ?
+                  undefined
+                : "noopener noreferrer"
+              }
               className="flex flex-col items-center p-6 glass-card hover-glow cursor-pointer"
               whileHover={{ y: -8, scale: 1.05 }}
               initial={{ opacity: 0, y: 20 }}

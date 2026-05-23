@@ -1,0 +1,164 @@
+{
+  "featured": {
+    "title": "Odyssey",
+    "type": "Full-Stack Web App",
+    "projectKind": "Freelancing",
+    "description": "A complete travel planning platform with hotel booking, itineraries, and reservations. Secured APIs using JWT and deployed via Railway.",
+    "features": [
+      "JWT-secured REST API with Spring Boot backend",
+      "Hotel booking and itinerary management system",
+      "Responsive React frontend with real-time reservation tracking"
+    ],
+    "year": "2024",
+    "team": "Solo Project",
+    "duration": "10 weeks",
+    "device": "browser",
+    "links": {
+      "github": "https://github.com/Hasi6558/Odyssey-Travel-Planning-site-Frontend",
+      "live": null
+    },
+    "images": [
+      "../assets/projects/haulage1.png",
+      "/screenshots/odyssey/odyssey-2.png",
+      "/screenshots/odyssey/odyssey-3.png"
+    ]
+  },
+  "grid": [
+    {
+      "title": "PHH Quotation Portal",
+      "type": "Full-Stack",
+      "projectKind": "Freelancing",
+      "description": "Part of an ERP system where users can request quotations and the system generates them automatically or manually, with full admin control over items and site management.",
+      "features": [
+        "Quotation request and auto/manual generation",
+        "Quotation download as PDF",
+        "Materials and product details management",
+        "Admin panel for item management and site control"
+      ],
+      "year": "2025",
+      "team": "Solo",
+      "duration": null,
+      "device": "browser",
+      "links": {
+        "github": null,
+        "live": null
+      },
+      "images": [
+        "/screenshots/ohh-quotation/ohh-1.png",
+        "/screenshots/ohh-quotation/ohh-2.png",
+        "/screenshots/ohh-quotation/ohh-3.png"
+      ]
+    },
+    {
+      "title": "VoiceDocs AI",
+      "type": "Full-Stack",
+      "projectKind": "Freelancing",
+      "description": "Documentation professionals spend too much time typing and manually formatting content. VoiceDocs AI solves this by letting users dictate content through speech, instantly refine it with AI-powered editing, and organize all outputs in a built-in file manager turning raw speech into polished, structured documents without ever touching a keyboard.",
+      "features": [
+        "Speech-to-text using Nova STT with English and Russian language support",
+        "AI-powered text editing with custom prompts and built-in presets",
+        "Presets: clear text, rewrite in book style, reorganize and extract main points",
+        "In-app file manager to save, organize, and revisit processed documents",
+        "Multi AI API integration for flexible and accurate text refinement"
+      ],
+      "year": "2025",
+      "team": "Solo",
+      "duration": null,
+      "device": "browser",
+      "links": {
+        "github": null,
+        "live": null
+      },
+      "images": [
+        "/screenshots/voicedocs-ai/voicedocs-1.png",
+        "/screenshots/voicedocs-ai/voicedocs-2.png",
+        "/screenshots/voicedocs-ai/voicedocs-3.png"
+      ]
+    },
+    {
+      "title": "Cargo Connect",
+      "type": "Full-Stack",
+      "projectKind": "Freelancing",
+      "description": "Managing a haulage fleet across multiple drivers, vehicles, and routes creates blind spots dispatchers lose track of assets in real time and reporting becomes a manual nightmare. Cargo Connect solves this with a centralized fleet management platform that gives operations teams live vehicle tracking, geofencing alerts, and automated reporting, while drivers, trailers, and containers are all managed from a single dashboard.",
+      "features": [
+        "Real-time vehicle and driver location tracking via Google Maps and Socket.io",
+        "Geofencing with automated alerts when assets enter or leave defined zones",
+        "Fleet management for drivers, vehicles, trailers, and containers with full CRUD",
+        "Interactive dashboards and exportable reports with Google Charts",
+        "Push notifications via Firebase, SMS via Nexmo, and email alerts via Nodemailer",
+        "PDF export for reports and delivery documents",
+        "JWT authentication with role-based route protection",
+        "File uploads to AWS S3 for documents and media"
+      ],
+      "tech": [
+        "React",
+        "TypeScript",
+        "Redux Toolkit",
+        "Mantine UI",
+        "Node.js",
+        "Express",
+        "MongoDB",
+        "MySQL",
+        "Socket.io",
+        "RabbitMQ",
+        "Google Maps API",
+        "AWS S3",
+        "Firebase"
+      ],
+      "year": null,
+      "team": "Solo",
+      "duration": null,
+      "device": "browser",
+      "links": {
+        "github": null,
+        "live": null
+      },
+      "images": [
+        "/screenshots/cargo-connect/cargo-1.png",
+        "/screenshots/cargo-connect/cargo-2.png",
+        "/screenshots/cargo-connect/cargo-3.png",
+        "/screenshots/cargo-connect/cargo-4.png"
+      ]
+    },
+    {
+      "title": "Cargo Connect — Driver App",
+      "type": "Mobile",
+      "projectKind": "Freelancing",
+      "description": "Truck drivers on the road need a reliable way to receive jobs, confirm deliveries, and stay in sync with operations without calling back to base for every update. The Cargo Connect driver app puts the full job lifecycle in the driver's hands: from accepting a job and completing pre-trip checklists, to capturing photo proof of delivery and reporting maintenance issues, all synced in real time with the operations dashboard.",
+      "features": [
+        "Job management — view, accept, start, and complete haulage jobs on the go",
+        "Photo proof capture for containers, trailers, seals, and consignment notes",
+        "Pre-task compliance checklist required before starting any job",
+        "Driver availability toggle synced live to the operations backend",
+        "Maps integration for pickup and drop-off navigation",
+        "In-app notifications and real-time operations alerts",
+        "Maintenance request submission with photo attachments",
+        "Leave application and management from within the app",
+        "Tap-to-call contacts for pickup and drop-off locations"
+      ],
+      "tech": [
+        "React Native",
+        "Expo",
+        "TypeScript",
+        "react-native-maps",
+        "Expo Camera",
+        "Expo Location",
+        "Expo Notifications"
+      ],
+      "year": null,
+      "team": "Solo",
+      "duration": null,
+      "device": "mobile",
+      "links": {
+        "github": null,
+        "live": null
+      },
+      "images": [
+        "/screenshots/cargo-connect-driver/driver-1.png",
+        "/screenshots/cargo-connect-driver/driver-2.png",
+        "/screenshots/cargo-connect-driver/driver-3.png",
+        "/screenshots/cargo-connect-driver/driver-4.png"
+      ]
+    }
+  ]
+}

@@ -44,9 +44,8 @@ const Hero = () => {
               duration: isMobile ? 0.3 : 0.6,
             }}
           >
-            A results-driven Full-Stack Developer skilled in React, Node.js, and
-            latest web technologies. I love crafting seamless, scalable web
-            experiences that connect users and technology.
+            I build fast, scalable web and mobile apps for startups and
+            businesses.
           </motion.p>
 
           <motion.div
@@ -67,7 +66,7 @@ const Hero = () => {
                   ?.scrollIntoView({ behavior: "smooth" })
               }
             >
-              Contact Me
+              Hire Me
               {!isMobile && (
                 <motion.span
                   className="inline-block ml-2"
@@ -118,9 +117,9 @@ const Hero = () => {
                   social.href.startsWith("mailto:") ? undefined : "_blank"
                 }
                 rel={
-                  social.href.startsWith("mailto:")
-                    ? undefined
-                    : "noopener noreferrer"
+                  social.href.startsWith("mailto:") ?
+                    undefined
+                  : "noopener noreferrer"
                 }
                 className="p-3 glass-card rounded-full cursor-hover"
                 whileHover={isMobile ? {} : { scale: 1.1, rotate: 5 }}
@@ -168,10 +167,9 @@ const Hero = () => {
           )}
 
           {/* Secondary pulsing glow - static on mobile */}
-          {isMobile ? (
+          {isMobile ?
             <div className="absolute inset-0 gradient-primary rounded-full blur-2xl opacity-30" />
-          ) : (
-            <motion.div
+          : <motion.div
               className="absolute inset-0 gradient-primary rounded-full blur-2xl opacity-30"
               animate={{
                 scale: [1, 1.3, 1],
@@ -183,7 +181,7 @@ const Hero = () => {
                 ease: "easeInOut",
               }}
             />
-          )}
+          }
 
           {/* Profile Image Container */}
           <motion.div
